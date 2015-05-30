@@ -1,6 +1,6 @@
 code/matlab/
 docs/
-video/
+video/balkon/*
+video/unq
 *.pyc
 *~
-.gitignore~
