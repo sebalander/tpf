@@ -172,22 +172,24 @@ cMAP34 = np.array([int(M['m10']/M['m00']),int(M['m01']/M['m00'])])
 M = cv2.moments(pMAP35)
 cMAP35 = np.array([int(M['m10']/M['m00']),int(M['m01']/M['m00'])])
 
+# Ratio m/px
+m_px = 0.5
+
 # Distances between centers of mass.
-px_m = 0.8
-dMAP112 = np.sqrt((cMAP11[0]-cMAP12[0])^2+(cMAP11[1]-cMAP12[1])^2)/px_m
-dMAP113 = np.sqrt((cMAP11[0]-cMAP13[0])^2+(cMAP11[1]-cMAP13[1])^2)/px_m
-dMAP114 = np.sqrt((cMAP11[0]-cMAP14[0])^2+(cMAP11[1]-cMAP14[1])^2)/px_m
-dMAP115 = np.sqrt((cMAP11[0]-cMAP15[0])^2+(cMAP11[1]-cMAP15[1])^2)/px_m
+dMAP112 = np.sqrt((cMAP11[0]-cMAP12[0])^2+(cMAP11[1]-cMAP12[1])^2)*m_px
+dMAP113 = np.sqrt((cMAP11[0]-cMAP13[0])^2+(cMAP11[1]-cMAP13[1])^2)*m_px
+dMAP114 = np.sqrt((cMAP11[0]-cMAP14[0])^2+(cMAP11[1]-cMAP14[1])^2)*m_px
+dMAP115 = np.sqrt((cMAP11[0]-cMAP15[0])^2+(cMAP11[1]-cMAP15[1])^2)*m_px
 
-dMAP212 = np.sqrt((cMAP21[0]-cMAP22[0])^2+(cMAP21[1]-cMAP22[1])^2)/px_m
-dMAP213 = np.sqrt((cMAP21[0]-cMAP23[0])^2+(cMAP21[1]-cMAP23[1])^2)/px_m
-dMAP214 = np.sqrt((cMAP21[0]-cMAP24[0])^2+(cMAP21[1]-cMAP24[1])^2)/px_m
-dMAP215 = np.sqrt((cMAP21[0]-cMAP25[0])^2+(cMAP21[1]-cMAP25[1])^2)/px_m
+dMAP212 = np.sqrt((cMAP21[0]-cMAP22[0])^2+(cMAP21[1]-cMAP22[1])^2)*m_px
+dMAP213 = np.sqrt((cMAP21[0]-cMAP23[0])^2+(cMAP21[1]-cMAP23[1])^2)*m_px
+dMAP214 = np.sqrt((cMAP21[0]-cMAP24[0])^2+(cMAP21[1]-cMAP24[1])^2)*m_px
+dMAP215 = np.sqrt((cMAP21[0]-cMAP25[0])^2+(cMAP21[1]-cMAP25[1])^2)*m_px
 
-dMAP312 = np.sqrt((cMAP31[0]-cMAP32[0])^2+(cMAP31[1]-cMAP32[1])^2)/px_m
-dMAP313 = np.sqrt((cMAP31[0]-cMAP33[0])^2+(cMAP31[1]-cMAP33[1])^2)/px_m
-dMAP314 = np.sqrt((cMAP31[0]-cMAP34[0])^2+(cMAP31[1]-cMAP34[1])^2)/px_m
-dMAP315 = np.sqrt((cMAP31[0]-cMAP35[0])^2+(cMAP31[1]-cMAP35[1])^2)/px_m
+dMAP312 = np.sqrt((cMAP31[0]-cMAP32[0])^2+(cMAP31[1]-cMAP32[1])^2)*m_px
+dMAP313 = np.sqrt((cMAP31[0]-cMAP33[0])^2+(cMAP31[1]-cMAP33[1])^2)*m_px
+dMAP314 = np.sqrt((cMAP31[0]-cMAP34[0])^2+(cMAP31[1]-cMAP34[1])^2)*m_px
+dMAP315 = np.sqrt((cMAP31[0]-cMAP35[0])^2+(cMAP31[1]-cMAP35[1])^2)*m_px
 
 # Create the BKG substractor
 bs = cv2.createBackgroundSubtractorMOG2()
@@ -209,41 +211,17 @@ nplot = 50
 # List of samples:
 rho00 = []
 
-rho11 = []
-rho12 = []
-rho13 = []
-rho14 = []
-rho15 = []
+rho11,rho12,rho13,rho14,rho15 = ([] for i in range(5))
+rho21,rho22,rho23,rho24,rho25 = ([] for i in range(5))
+rho31,rho32,rho33,rho34,rho35 = ([] for i in range(5))
 
-rho21 = []
-rho22 = []
-rho23 = []
-rho24 = []
-rho25 = []
 
-rho31 = []
-rho32 = []
-rho33 = []
-rho34 = []
-rho35 = []
-
-s112 = []
-s113 = []
-s114 = []
-s115 = []
-
-s212 = []
-s213 = []
-s214 = []
-s215 = []
-
-s312 = []
-s313 = []
-s314 = []
-s315 = []
+s112,s113,s114,s115 = ([] for i in range(4))
+s212,s213,s214,s215 = ([] for i in range(4))
+s312,s313,s314,s315 = ([] for i in range(4))
 
 # Number of frames between correlations
-ncorr = 50
+ncorr = 25
 nupdate = 1
 nupdatei = 0
 
@@ -265,23 +243,41 @@ ax0_ydata = np.zeros(nplot-1)
 for i in range(len(ax0_label)):
   ax0_lines.append(ax0.plot(ax0_xdata,ax0_ydata,ax0_color[i],label=ax0_label[i]))
 
-# Subplot 1: Total density
+# Subplot 1: Correlation
 ax1 = fig.add_subplot(312)
-ax1.axis([0,nplot,0,1])
-ax1.set_ylabel('Densidad total [%]')
-ax1_lines = ax1.plot(ax0_ydata,ax0_color[0],label='rho')
+ax1.axis([0,nplot,-0.1,1.2])
+ax1.set_ylabel('Correlacion')
+ax1_lines = ax1.plot(ax0_xdata,ax0_ydata,'r')
 
-# Subplot 2: Delays in secs
+# Subplot 2: Speed in km/h
 ax2 = fig.add_subplot(313)
 ax2.axis([0,nplot,0,200])
-ax2.set_ylabel('Velocidad [m/s]')
-ax2_label = ['s112','s113','s114','s115']
-ax2_lines = []
-for i in range(len(ax2_label)):
-  ax2_lines.append(ax2.plot(ax0_ydata,ax0_color[i],label=ax2_label[i]))
+ax2.set_ylabel('Velocidad [km/h]')
+ax2_lines = ax2.plot(ax0_ydata,'r',label='s212')
 
 # Time between frames in seg
 tbf = 1./cap.get(mod.CV_CAP_PROP_FPS) # It happens to be constant on the original video. If it weren't, it is easy to calculate but CPU time consuming. At least, that's what I experienced.
+
+# Draw Contours in another image
+mcol = np.zeros(m00.shape,np.uint8)
+
+cv2.fillConvexPoly(mcol,np.array(pVCA[0]),(0,0,255))
+cv2.fillConvexPoly(mcol,np.array(pVCA[1]),(0,255,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[2]),(255,0,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[3]),(255,255,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[4]),(255,0,255))
+
+cv2.fillConvexPoly(mcol,np.array(pVCA[5]),(0,0,255))
+cv2.fillConvexPoly(mcol,np.array(pVCA[6]),(0,255,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[7]),(255,0,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[8]),(255,255,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[9]),(255,0,255))
+
+cv2.fillConvexPoly(mcol,np.array(pVCA[10]),(0,0,255))
+cv2.fillConvexPoly(mcol,np.array(pVCA[11]),(0,255,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[12]),(255,0,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[13]),(255,255,0))
+cv2.fillConvexPoly(mcol,np.array(pVCA[14]),(255,0,255))
 
 # Main Loop
 while(cap.isOpened()):
@@ -314,6 +310,13 @@ while(cap.isOpened()):
   frg34 = cv2.bitwise_and(ffrg,m[13])
   frg35 = cv2.bitwise_and(ffrg,m[14])
 
+  # Paint masks with each corresponding colour
+  ffrgBGR = cv2.cvtColor(ffrg,cv2.COLOR_GRAY2BGR)
+  ffrgBGRinv = cv2.bitwise_not(ffrgBGR)
+  fr_bg = cv2.bitwise_and(fr,ffrgBGRinv)
+  ffrgBGR_mcol = cv2.bitwise_and(mcol,ffrgBGR)
+  fr_tot = cv2.add(fr_bg,ffrgBGR_mcol)
+  
   # Each mask filled pixels
   a11 = np.sum(np.sum(frg11))/255.
   a12 = np.sum(np.sum(frg12))/255.
@@ -384,6 +387,11 @@ while(cap.isOpened()):
     
     if nupdatei == nupdate:
       nupdatei = 0
+      
+      # Calculate difference, propose by D.O.
+#      drho21 = np.diff(rho21)
+#      drho22 = np.diff(rho22)
+      
       # Calculate cross correlation
       c112 = np.correlate(rho11[-ncorr:],rho12[-ncorr:],'full')
       c113 = np.correlate(rho11[-ncorr:],rho13[-ncorr:],'full')
@@ -415,61 +423,73 @@ while(cap.isOpened()):
       c341 = np.correlate(rho34[-ncorr:],rho31[-ncorr:],'full')
       c351 = np.correlate(rho35[-ncorr:],rho31[-ncorr:],'full')
       
-      # Find delay from cross correlation
-#      d112.append(np.argmax(c112)-(ncorr-1)) # My version
-
-      d112 = (np.argmax(c112)-np.argmax(c121))/2.*tbf
-      d113 = (np.argmax(c113)-np.argmax(c131))/2.*tbf
-      d114 = (np.argmax(c114)-np.argmax(c141))/2.*tbf
-      d115 = (np.argmax(c115)-np.argmax(c151))/2.*tbf
+      # Normalize correlation
+      cnorm = [i+1 for i in range (ncorr-1)]+[ncorr-i for i in range (ncorr)]
       
-      d212 = (np.argmax(c212)-np.argmax(c221))/2.*tbf
-      d213 = (np.argmax(c213)-np.argmax(c231))/2.*tbf
-      d214 = (np.argmax(c214)-np.argmax(c241))/2.*tbf
-      d215 = (np.argmax(c215)-np.argmax(c251))/2.*tbf
+      c112 = c112/cnorm
+      c113 = c113/cnorm
+      c114 = c114/cnorm
+      c115 = c115/cnorm
       
-      d312 = (np.argmax(c312)-np.argmax(c321))/2.*tbf
-      d313 = (np.argmax(c313)-np.argmax(c331))/2.*tbf
-      d314 = (np.argmax(c314)-np.argmax(c341))/2.*tbf
-      d315 = (np.argmax(c315)-np.argmax(c351))/2.*tbf
+      c212 = c212/cnorm
+      c213 = c213/cnorm
+      c214 = c214/cnorm
+      c215 = c215/cnorm
       
-      # Mean speed
-      s112.append(dMAP112/d112) if d112 > 0 else s112.append(0)
-      s113.append(dMAP113/d113) if d113 > 0 else s113.append(0)
-      s114.append(dMAP114/d114) if d114 > 0 else s114.append(0)
-      s115.append(dMAP115/d115) if d115 > 0 else s115.append(0)
+      c312 = c312/cnorm
+      c313 = c313/cnorm
+      c314 = c314/cnorm
+      c315 = c315/cnorm
       
-      s212.append(dMAP212/d212) if d212 > 0 else s212.append(0)
-      s213.append(dMAP213/d213) if d213 > 0 else s213.append(0)
-      s214.append(dMAP214/d214) if d214 > 0 else s214.append(0)
-      s215.append(dMAP215/d215) if d215 > 0 else s215.append(0)
+      # Moving average propose by S.A.
+#      if np.max(c212) > 0:
+#        argavg_seba = np.average(range(ncorr*2-1),weights = c212)
+#        d212 = (argavg_seba-(ncorr-1))*tbf
+#      else: 
+#        d212 = 0
       
-      s312.append(dMAP312/d312) if d312 > 0 else s312.append(0)
-      s313.append(dMAP313/d313) if d313 > 0 else s313.append(0)
-      s314.append(dMAP314/d314) if d314 > 0 else s314.append(0)
-      s315.append(dMAP315/d315) if d315 > 0 else s315.append(0)
+      # Calculate delay
+      d112 = ((np.argmax(c112)-np.argmax(c121))/2.*tbf if np.max(c112)>0 else 0)
+      d113 = ((np.argmax(c113)-np.argmax(c131))/2.*tbf if np.max(c112)>0 else 0)
+      d114 = ((np.argmax(c114)-np.argmax(c141))/2.*tbf if np.max(c112)>0 else 0)
+      d115 = ((np.argmax(c115)-np.argmax(c151))/2.*tbf if np.max(c112)>0 else 0)
       
-      print d212,' s ',dMAP212,' px ',s212[-1],' px/s '
+      d212 = ((np.argmax(c212)-np.argmax(c221))/2.*tbf if np.max(c112)>0 else 0)
+      d213 = ((np.argmax(c213)-np.argmax(c231))/2.*tbf if np.max(c112)>0 else 0)
+      d214 = ((np.argmax(c214)-np.argmax(c241))/2.*tbf if np.max(c112)>0 else 0)
+      d215 = ((np.argmax(c215)-np.argmax(c251))/2.*tbf if np.max(c112)>0 else 0)
+      
+      d312 = ((np.argmax(c312)-np.argmax(c321))/2.*tbf if np.max(c112)>0 else 0)
+      d313 = ((np.argmax(c313)-np.argmax(c331))/2.*tbf if np.max(c112)>0 else 0)
+      d314 = ((np.argmax(c314)-np.argmax(c341))/2.*tbf if np.max(c112)>0 else 0)
+      d315 = ((np.argmax(c315)-np.argmax(c351))/2.*tbf if np.max(c112)>0 else 0)
+      
+      # Average speed
+      s112.append(dMAP112/d112*3.6) if d112 > 0 else s112.append(0)
+      s113.append(dMAP113/d113*3.6) if d113 > 0 else s113.append(0)
+      s114.append(dMAP114/d114*3.6) if d114 > 0 else s114.append(0)
+      s115.append(dMAP115/d115*3.6) if d115 > 0 else s115.append(0)
+      
+      s212.append(dMAP212/d212*3.6) if d212 > 0 else s212.append(0)
+      s213.append(dMAP213/d213*3.6) if d213 > 0 else s213.append(0)
+      s214.append(dMAP214/d214*3.6) if d214 > 0 else s214.append(0)
+      s215.append(dMAP215/d215*3.6) if d215 > 0 else s215.append(0)
+      
+      s312.append(dMAP312/d312*3.6) if d312 > 0 else s312.append(0)
+      s313.append(dMAP313/d313*3.6) if d313 > 0 else s313.append(0)
+      s314.append(dMAP314/d314*3.6) if d314 > 0 else s314.append(0)
+      s315.append(dMAP315/d315*3.6) if d315 > 0 else s315.append(0)
       
       # Plot
       ax0_lines[0][0].set_ydata(rho21)
       ax0_lines[1][0].set_ydata(rho22)
-      ax0_lines[2][0].set_ydata(rho23)
-      ax0_lines[3][0].set_ydata(rho24)
-      ax0_lines[4][0].set_ydata(rho25)
       
-      ax1_lines[0].set_ydata(rho00)
+      ax1_lines[0].set_xdata(range(len(c212)))
+      ax1_lines[0].set_ydata(c212/max(c212))
       
       ax2_xdata = range(len(s112))
-      ax2_lines[0][0].set_xdata(ax2_xdata)
-      ax2_lines[1][0].set_xdata(ax2_xdata)
-      ax2_lines[2][0].set_xdata(ax2_xdata)
-      ax2_lines[3][0].set_xdata(ax2_xdata)
-      
-      ax2_lines[0][0].set_ydata(s212)
-      ax2_lines[1][0].set_ydata(s213)
-      ax2_lines[2][0].set_ydata(s214)
-      ax2_lines[3][0].set_ydata(s215)
+      ax2_lines[0].set_xdata(ax2_xdata)
+      ax2_lines[0].set_ydata(s212)
       
       plt.draw()
       if len(s112) == nplot:
@@ -489,7 +509,7 @@ while(cap.isOpened()):
         del(s315[0])
 
   # Show different steps
-  cv2.imshow('1 - Frame',fr)
+  cv2.imshow('1 - Frame',fr_tot)
   cv2.moveWindow('1 - Frame',0,0)
   # Playback buttons
   k = cv2.waitKey(tms) & 0xFF

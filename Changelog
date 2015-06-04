@@ -1,3 +1,6 @@
 2015-05-31 22:55
-Now the masks, mask areas and mask contours load into lists in the same loop.
+The masks, mask areas and mask contours load into lists in the same loop.
 Instead of delays, the speed is plotted.
+2015-06-03 22:41
+The foreground of each lane and part is highlighted with different colours.
+Instead of rho, the correlation is plotted.

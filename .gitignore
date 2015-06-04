@@ -3,7 +3,6 @@ code/cpp/
 code/py/superados/
 code/py/trash/
 docs/
-video/balkon/*
-video/unq
+video/
 *.pyc
 *~
