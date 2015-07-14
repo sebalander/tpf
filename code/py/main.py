@@ -46,7 +46,9 @@ ptzv = cv2.remap(sphrot,ThetaR,PhiR,cv2.INTER_LINEAR)
 #cv2.imshow('Imagen esferica',cv2.resize(sph,(500,500)))
 cv2.imshow('Imagen esferica rotada',cv2.resize(sphrot,(500,500)))
 cv2.imshow('Imagen PTZ virtual obtenida',ptzv)
+# Se reubican las ventanas
 cv2.moveWindow('Imagen esferica rotada',548,0)
 cv2.moveWindow('Imagen PTZ virtual obtenida',0,0)
+# Limpieza de las ventanas
 cv2.waitKey(0)
 cv2.destroyAllWindows()
