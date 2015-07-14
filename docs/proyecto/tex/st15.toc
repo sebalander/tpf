@@ -1,0 +1,21 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introduccion}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Videodeteccion}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Sistemas de visi\IeC {\'o}n panor\IeC {\'a}mica}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Clasificaci\IeC {\'o}n BKG/FRG mediante GMM}{7}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Operaciones morfol\IeC {\'o}gicas}{9}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Transformaci\IeC {\'o}n a coordenadas cartesianas}{9}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Trackeo Kalman en cartesianas}{9}{subsection.1.6}
+\contentsline {section}{\numberline {2}Objetivos de este trabajo}{9}{section.2}
+\contentsline {subsection}{\numberline {2.1}Objetivos espec\IeC {\'\i }ficos}{10}{subsection.2.1}
+\contentsline {section}{\numberline {3}Calibraci\IeC {\'o}n de c\IeC {\'a}mara fisheye comercial}{10}{section.3}
+\contentsline {subsection}{\numberline {3.1}C\IeC {\'a}mara fisheye utilizada}{10}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Identificaci\IeC {\'o}n de la c\IeC {\'a}mara - Calibraci\IeC {\'o}n}{10}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Modelo unificado}{12}{subsection.3.3}
+\contentsline {section}{\numberline {4}Correcci\IeC {\'o}n de deformaciones locales}{13}{section.4}
+\contentsline {subsection}{\numberline {4.1}Metodo}{13}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Rotaci\IeC {\'o}n del eje principal de la c\IeC {\'a}mara plana simulada}{14}{subsection.4.2}
+\contentsline {section}{\numberline {5}Detecci\IeC {\'o}n de objetos m\IeC {\'u}ltiples}{16}{section.5}
+\contentsline {subsection}{\numberline {5.1}Clasificaci\IeC {\'o}n BKG/FRG mediante MOG2}{16}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}M\IeC {\'a}scara ROI}{17}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}C\IeC {\'a}lculo de posici\IeC {\'o}n y tama\IeC {\~n}o del objeto en cartesianas}{17}{subsection.5.3}
