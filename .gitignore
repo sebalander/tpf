@@ -2,7 +2,14 @@ code/matlab/
 code/cpp/
 code/py/superados/
 code/py/trash/
-docs/
+docs/anteproyecto/
+docs/argencon/
+docs/deltagii/
+docs/manual/
+docs/otros/
+docs/papers/
+docs/ppt/
+docs/sai/
 video/
 *.pyc
 *~
