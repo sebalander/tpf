@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Introduccion}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Videodeteccion}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Sistemas de visi\363n panor\341mica}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Clasificaci\363n BKG/FRG mediante GMM}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Operaciones morfol\363gicas}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Transformaci\363n a coordenadas cartesianas}{section.1}% 6
+\BOOKMARK [2][-]{subsection.1.6}{Trackeo Kalman en cartesianas}{section.1}% 7
+\BOOKMARK [1][-]{section.2}{Objetivos de este trabajo}{}% 8
+\BOOKMARK [2][-]{subsection.2.1}{Objetivos espec\355ficos}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Calibraci\363n de c\341mara fisheye comercial}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{C\341mara fisheye utilizada}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Identificaci\363n de la c\341mara - Calibraci\363n}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{Modelo unificado}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Correcci\363n de deformaciones locales}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Metodo}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Rotaci\363n del eje principal de la c\341mara plana simulada}{section.4}% 16
+\BOOKMARK [1][-]{section.5}{Detecci\363n de objetos m\372ltiples}{}% 17
+\BOOKMARK [2][-]{subsection.5.1}{Clasificaci\363n BKG/FRG mediante MOG2}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.2}{M\341scara ROI}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.3}{C\341lculo de posici\363n y tama\361o del objeto en cartesianas}{section.5}% 20

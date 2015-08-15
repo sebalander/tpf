@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{titterington1984}
+D.~Titterington.
+\newblock {\em Recursive parameter estimation using incomplete data}.
+\newblock Roy. Statis. Soc., 1984.
+
+\bibitem{zivkovic2004}
+Z.~Zivkovic.
+\newblock Improved adaptive gausian mixture model for background subtraction.
+\newblock {\em International Conference Pattern Recognition}, 2004.
+
+\bibitem{zivkovic2006}
+Z.~Zivkovic and F.~van~der Heijden.
+\newblock Efficient adaptive density estimation per image pixel for the task of
+  background subtraction.
+\newblock {\em Pattern Recognition Letters}, 2006.
+
+\end{thebibliography}
